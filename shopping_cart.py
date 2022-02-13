@@ -38,6 +38,7 @@ def to_usd(my_price):
 
 
 total_price = 0
+selected_ids = []
 
 while True:
 
@@ -54,17 +55,22 @@ while True:
     if product_id == "DONE":
         break
     
-    #LOOK UP CORRESPONDING PRODUCTS
+    #SORT SELECTED ITEMS INTO NEW LIST
     else:
-        matching_products = []
-        for id in products:
-            if str(id["id"]) == str(product_id):
-                #this is a match and used string conversion since the list uses integers
-                matching_products.append(id)
-                #print(matching_product)
+        selected_ids.append(product_id)
 
-        matched_product = matching_products[0] #(0 = the placement of the item in the list?)
-        total_price = total_price + matched_product["price"]
-        #print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
+#print (selected_ids)
+
+#LOOK UP CORRESPONDING PRODUCTS IN NEW LIST
+for product_id in selected_ids:
+    matching_products = []
+    for id in products:
+        if str(id["id"]) == str(product_id):
+        #this is a match and used string conversion since the list uses integers
+            matching_products.append(id)
+            #print(matching_product)
+    matched_product = matching_products[0] #(0 = the placement of the item in the list?)
+    total_price = total_price + matched_product["price"]
+    print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
 
 print ("TOTAL PRICE: ", to_usd(total_price))
