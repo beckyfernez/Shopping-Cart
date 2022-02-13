@@ -37,28 +37,34 @@ def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
 
 
-# TODO: write some Python code here to produce the desired output
-
+total_price = 0
 
 while True:
 
     #ASK FOR USER INPUT
+    product_id = input ("Please input a product identifier, or 'DONE' is there are no more items: ")
+    #print(product_id)
+    #print(type(product_id))
 
-    product_id = input ("Please input a product identifier: ")
+    #VALIDATE USER INPUT
+    #https://www.datasciencemadesimple.com/lower-upper-title-function-python/
+    product_id = product_id.upper()
 
+    #EXIT CODE WHEN FINISHED
     if product_id == "DONE":
         break
     
-    else:
     #LOOK UP CORRESPONDING PRODUCTS
-    matching_product = []
+    else:
+        matching_products = []
+        for id in products:
+            if str(id["id"]) == str(product_id):
+                #this is a match and used string conversion since the list uses integers
+                matching_products.append(id)
+                #print(matching_product)
 
-    for id in products:
-        if str(id["id"]) == str(product_id):
-            #this is a match and used string conversion since the list uses integers
-            matching_product.append(id)
+        matched_product = matching_products[0] #(0 = the placement of the item in the list?)
+        total_price = total_price + matched_product["price"]
+        #print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
 
-    print(matching_product)
-
-    matched_product = matching_products[0]
-    print (matched_product["name"], matched_product["name"])
+print ("TOTAL PRICE: ", to_usd(total_price))
