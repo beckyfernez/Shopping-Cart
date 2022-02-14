@@ -55,6 +55,10 @@ while True:
 
     #EXIT CODE WHEN FINISHED
     if product_id == "DONE":
+        print ("-------------------------------")
+        print (" ")
+        print ("processing receipt...")
+        print (" ")
         break
     
     #STORE SELECTED ITEMS INTO NEW LIST
@@ -82,9 +86,16 @@ print ("COBRA GROCERY")
 print ("-------------------------------")
 print ("Website: www.cg.com")
 print ("Phone: 202.687.5874")
-print ("Checkout Time: ")
+
+#Current Date and Time
+#https://www.pythonprogramming.in/get-current-time-in-mst-est-utc-and-gmt.html
+from datetime import datetime
+from pytz import timezone
+est = timezone('EST')
+print ("Checkout Time: ", datetime.now(est))
 print ("-------------------------------")
 print ("Shopping Cart Items: ")
+
 
 #RETURN SELECTED PRODUCTS
 for products in matching_products:
@@ -102,7 +113,7 @@ print ("Subtotal: ", to_usd(subtotal))
 #https://www.kite.com/python/answers/how-to-limit-a-float-to-two-decimal-places-in-python
 tax = subtotal * 0.06
 tax_cost = round(tax, 3)
-print ("DC Sales Tax: ", to_usd(tax_cost))
+print ("DC Sales Tax (6%): ", to_usd(tax_cost))
 
 
 total = subtotal + tax_cost
@@ -111,13 +122,3 @@ print ("Total: ", to_usd(total))
 
 print ("-------------------------------")
 print ("Thanks for your business! Please come again.")
-
-
-# TODO ---a grocery name of your choice
-#      ---a grocery store phone number, website URL, address
-#      -date and time of the beginning of the check out process
-#      ---name and price of each shopping cart item (format USD and cents (float or double))
-#      ---total cost of all items (format USD and cents)
-#      ---the amount of tax owed (multiply total cost by DC's tax rate)
-#      ---total amount owed (format USD and cents, add total tax and cost)
-#      ---message thanking the customer and encouraging the customer to shop again
