@@ -64,7 +64,7 @@ while True:
 #print (selected_ids) (e.g. ['4', '5'])
 
 
-#LOOK UP & RETURN CORRESPONDING PRODUCTS IN NEW LIST
+#LOOK UP CORRESPONDING PRODUCTS IN NEW LIST
 for product_id in selected_ids:
     for id in products:
         if str(id["id"]) == str(product_id):
@@ -76,6 +76,7 @@ for product_id in selected_ids:
     #print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
 
 
+#RECEIPT FORMATTING
 print ("-------------------------------")
 print ("COBRA GROCERY")
 print ("-------------------------------")
@@ -85,7 +86,7 @@ print ("Checkout Time: ")
 print ("-------------------------------")
 print ("Shopping Cart Items: ")
 
-
+#RETURN SELECTED PRODUCTS
 for products in matching_products:
     name = str(products["name"])
     price = products["price"]
@@ -94,8 +95,20 @@ for products in matching_products:
 
 print ("-------------------------------")
 print ("Subtotal: ", to_usd(subtotal))
-print ("DC Sales Tax: ")
-print ("Total: ")
+
+
+#Sales tax rate in DC is 6% on all sales items; rounding float to 2 decimal places
+#https://howtostartanllc.com/taxes/district-of-columbia-sales-tax#:~:text=Fortunately%2C%20D.C.%20has%20only%20a,Zip%20Code%20in%20the%20US.
+#https://www.kite.com/python/answers/how-to-limit-a-float-to-two-decimal-places-in-python
+tax = subtotal * 0.06
+tax_cost = round(tax, 3)
+print ("DC Sales Tax: ", to_usd(tax_cost))
+
+
+total = subtotal + tax_cost
+print ("Total: ", to_usd(total))
+
+
 print ("-------------------------------")
 print ("Thanks for your business! Please come again.")
 
@@ -105,6 +118,6 @@ print ("Thanks for your business! Please come again.")
 #      -date and time of the beginning of the check out process
 #      ---name and price of each shopping cart item (format USD and cents (float or double))
 #      ---total cost of all items (format USD and cents)
-#      -the amount of tax owed (multiply total cost by DC's tax rate)
-#      -total amount owed (format USD and cents, add total tax and cost)
+#      ---the amount of tax owed (multiply total cost by DC's tax rate)
+#      ---total amount owed (format USD and cents, add total tax and cost)
 #      ---message thanking the customer and encouraging the customer to shop again
