@@ -40,6 +40,11 @@ def to_usd(my_price):
 subtotal = 0
 selected_ids = []
 matching_products = []
+dc_tax = 0.06
+
+
+import os
+TAX_RATE = os.getenv("TAX_RATE", default=dc_tax)
 
 
 while True:
@@ -121,7 +126,7 @@ print ("Subtotal: ", to_usd(subtotal))
 #ROUNDING: 2 decimal places
 #https://howtostartanllc.com/taxes/district-of-columbia-sales-tax#:~:text=Fortunately%2C%20D.C.%20has%20only%20a,Zip%20Code%20in%20the%20US.
 #https://www.kite.com/python/answers/how-to-limit-a-float-to-two-decimal-places-in-python
-tax = subtotal * 0.06
+tax = subtotal * TAX_RATE   #(input env var here)
 tax_cost = round(tax, 3)
 print ("DC Sales Tax (6%): ", to_usd(tax_cost))
 
