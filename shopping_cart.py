@@ -39,6 +39,8 @@ def to_usd(my_price):
 
 total_price = 0
 selected_ids = []
+matching_products = []
+
 
 while True:
 
@@ -55,22 +57,38 @@ while True:
     if product_id == "DONE":
         break
     
-    #SORT SELECTED ITEMS INTO NEW LIST
+    #STORE SELECTED ITEMS INTO NEW LIST
     else:
         selected_ids.append(product_id)
 
-#print (selected_ids)
+#print (selected_ids) (e.g. ['4', '5'])
 
-#LOOK UP CORRESPONDING PRODUCTS IN NEW LIST
+
+#LOOK UP & RETURN CORRESPONDING PRODUCTS IN NEW LIST
 for product_id in selected_ids:
-    matching_products = []
     for id in products:
         if str(id["id"]) == str(product_id):
-        #this is a match and used string conversion since the list uses integers
+        #this is a match using string conversion since the list uses integers
             matching_products.append(id)
-            #print(matching_product)
+            #print(matching_products)
     matched_product = matching_products[0] #(0 = the placement of the item in the list?)
-    total_price = total_price + matched_product["price"]
-    print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
+    total_price = total_price + matched_product["price"] #this is an int
+    #print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
+
+
+for products in matching_products:
+    name = str(products["name"])
+    print (name)
 
 print ("TOTAL PRICE: ", to_usd(total_price))
+
+
+
+# TODO -a grocery name of your choice
+#      -a grocery store phone number, website URL, address
+#      -date and time of the beginning of the check out process
+#      -name and price of each shopping cart item (format USD and cents (float or double))
+#      -total cost of all items (format USD and cents)
+#      -the amount of tax owed (multiply total cost by DC's tax rate)
+#      -total amount owed (format USD and cents, add total tax and cost)
+#      -message thanking the customer and encouraging the customer to shop again
