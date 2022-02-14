@@ -54,18 +54,28 @@ while True:
     product_id = product_id.upper()
 
     #EXIT CODE WHEN FINISHED
-    if product_id == "DONE":
+    if str(product_id) == "DONE":
         print ("-------------------------------")
         print (" ")
         print ("processing receipt...")
         print (" ")
         break
-    
+
     #STORE SELECTED ITEMS INTO NEW LIST
-    else:
+    elif int(product_id) in range (1, 20):
         selected_ids.append(product_id)
 
 #print (selected_ids) (e.g. ['4', '5'])
+
+    elif int(product_id) not in range (1, 20):
+        print ("-------------------------------")
+        print ("Product identifier not found. Please try again.")
+        print ("-------------------------------")
+
+    # what if the input is a string typo? how can I get the program to not crash?
+    #elif product_id != "DONE":
+    #    print ("Product identifier not found. Please try again.")
+    #    quit ()
 
 
 #LOOK UP CORRESPONDING PRODUCTS IN NEW LIST
