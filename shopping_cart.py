@@ -53,7 +53,7 @@ while True:
     #https://www.datasciencemadesimple.com/lower-upper-title-function-python/
     product_id = product_id.upper()
 
-    #EXIT CODE WHEN FINISHED
+        #EXIT CODE WHEN FINISHED
     if str(product_id) == "DONE":
         print ("-------------------------------")
         print (" ")
@@ -61,7 +61,8 @@ while True:
         print (" ")
         break
 
-    #STORE SELECTED ITEMS INTO NEW LIST
+        #STORE SELECTED ITEMS INTO NEW LIST
+        #https://stackoverflow.com/questions/12140185/using-in-range-in-an-if-else-statment
     elif int(product_id) in range (1, 20):
         selected_ids.append(product_id)
 
@@ -72,7 +73,7 @@ while True:
         print ("Product identifier not found. Please try again.")
         print ("-------------------------------")
 
-    # what if the input is a string typo? how can I get the program to not crash?
+        # TODO what if the input is a string typo? how can I get the program to not crash?
     #elif product_id != "DONE":
     #    print ("Product identifier not found. Please try again.")
     #    quit ()
@@ -97,7 +98,7 @@ print ("-------------------------------")
 print ("Website: www.cg.com")
 print ("Phone: 202.687.5874")
 
-#Current Date and Time
+#CURRENT DATE AND TIME
 #https://www.pythonprogramming.in/get-current-time-in-mst-est-utc-and-gmt.html
 from datetime import datetime
 from pytz import timezone
@@ -106,29 +107,27 @@ print ("Checkout Time: ", datetime.now(est))
 print ("-------------------------------")
 print ("Shopping Cart Items: ")
 
-
 #RETURN SELECTED PRODUCTS
 for products in matching_products:
     name = str(products["name"])
     price = products["price"]
     print ("+", name, " (", to_usd(price), ")")
 
-
+#SUBTOTAL
 print ("-------------------------------")
 print ("Subtotal: ", to_usd(subtotal))
 
-
-#Sales tax rate in DC is 6% on all sales items; rounding float to 2 decimal places
+#SALES TAX RATE: 6% in DC on all sales items
+#ROUNDING: 2 decimal places
 #https://howtostartanllc.com/taxes/district-of-columbia-sales-tax#:~:text=Fortunately%2C%20D.C.%20has%20only%20a,Zip%20Code%20in%20the%20US.
 #https://www.kite.com/python/answers/how-to-limit-a-float-to-two-decimal-places-in-python
 tax = subtotal * 0.06
 tax_cost = round(tax, 3)
 print ("DC Sales Tax (6%): ", to_usd(tax_cost))
 
-
+#TOTAL PRICE
 total = subtotal + tax_cost
 print ("Total: ", to_usd(total))
-
 
 print ("-------------------------------")
 print ("Thanks for your business! Please come again.")
