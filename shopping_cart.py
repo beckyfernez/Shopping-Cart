@@ -37,7 +37,7 @@ def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
 
 
-total_price = 0
+subtotal = 0
 selected_ids = []
 matching_products = []
 
@@ -72,23 +72,39 @@ for product_id in selected_ids:
             matching_products.append(id)
             #print(matching_products)
     matched_product = matching_products[0] #(0 = the placement of the item in the list?)
-    total_price = total_price + matched_product["price"] #this is an int
+    subtotal = subtotal + matched_product["price"] #this is an int
     #print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
+
+
+print ("-------------------------------")
+print ("COBRA GROCERY")
+print ("-------------------------------")
+print ("Website: www.cg.com")
+print ("Phone: 202.687.5874")
+print ("Checkout Time: ")
+print ("-------------------------------")
+print ("Shopping Cart Items: ")
 
 
 for products in matching_products:
     name = str(products["name"])
-    print (name)
-
-print ("TOTAL PRICE: ", to_usd(total_price))
-
+    price = products["price"]
+    print ("+", name, " (", to_usd(price), ")")
 
 
-# TODO -a grocery name of your choice
-#      -a grocery store phone number, website URL, address
+print ("-------------------------------")
+print ("Subtotal: ", to_usd(subtotal))
+print ("DC Sales Tax: ")
+print ("Total: ")
+print ("-------------------------------")
+print ("Thanks for your business! Please come again.")
+
+
+# TODO ---a grocery name of your choice
+#      ---a grocery store phone number, website URL, address
 #      -date and time of the beginning of the check out process
-#      -name and price of each shopping cart item (format USD and cents (float or double))
-#      -total cost of all items (format USD and cents)
+#      ---name and price of each shopping cart item (format USD and cents (float or double))
+#      ---total cost of all items (format USD and cents)
 #      -the amount of tax owed (multiply total cost by DC's tax rate)
 #      -total amount owed (format USD and cents, add total tax and cost)
-#      -message thanking the customer and encouraging the customer to shop again
+#      ---message thanking the customer and encouraging the customer to shop again
