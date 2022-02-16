@@ -48,10 +48,10 @@ python shopping_cart.py
 Here is a demonstration of the application:
 
 ```
-Please input a product identifier, or 'DONE' is there are no more items: 1
-Please input a product identifier, or 'DONE' is there are no more items: 2
-Please input a product identifier, or 'DONE' is there are no more items: 3
-Please input a product identifier, or 'DONE' is there are no more items: DONE
+Please input a product identifier, or 'DONE' if there are no more items: 1
+Please input a product identifier, or 'DONE' if there are no more items: 2
+Please input a product identifier, or 'DONE' if there are no more items: 3
+Please input a product identifier, or 'DONE' if there are no more items: DONE
 -------------------------------
 
 processing receipt...

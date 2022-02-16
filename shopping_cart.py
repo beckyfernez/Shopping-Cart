@@ -50,7 +50,7 @@ TAX_RATE = os.getenv("TAX_RATE", default=dc_tax)
 while True:
 
     #ASK FOR USER INPUT
-    product_id = input ("Please input a product identifier, or 'DONE' is there are no more items: ")
+    product_id = input ("Please input a product identifier, or 'DONE' if there are no more items: ")
     #print(product_id)
     #print(type(product_id))
 
@@ -60,20 +60,16 @@ while True:
 
         #EXIT CODE WHEN FINISHED
     if str(product_id) == "DONE":
-        print ("-------------------------------")
-        print (" ")
-        print ("processing receipt...")
-        print (" ")
         break
 
         #STORE SELECTED ITEMS INTO NEW LIST
         #https://stackoverflow.com/questions/12140185/using-in-range-in-an-if-else-statment
-    elif int(product_id) in range (1, 20):
+    elif int(product_id) in range (1, 21):
         selected_ids.append(product_id)
 
-#print (selected_ids) (e.g. ['4', '5'])
+        #print (selected_ids) (e.g. ['4', '5'])
 
-    elif int(product_id) not in range (1, 20):
+    elif int(product_id) not in range (1, 21):
         print ("-------------------------------")
         print ("Product identifier not found. Please try again.")
         print ("-------------------------------")
@@ -83,7 +79,6 @@ while True:
     #    print ("Product identifier not found. Please try again.")
     #    quit ()
 
-
 #LOOK UP CORRESPONDING PRODUCTS IN NEW LIST
 for product_id in selected_ids:
     for id in products:
@@ -91,17 +86,23 @@ for product_id in selected_ids:
         #this is a match using string conversion since the list uses integers
             matching_products.append(id)
             #print(matching_products)
-    matched_product = matching_products[0] #(0 = the placement of the item in the list?)
-    subtotal = subtotal + matched_product["price"] #this is an int
+    #matched_product = matching_products[0] #(0 = the placement of the item in the list?)
+    #subtotal = subtotal + matched_product["price"] #this is an int
     #print (matched_product["name"], " (", to_usd(matched_product["price"]), ")")
+    #print (subtotal)
 
 
 #RECEIPT FORMATTING
 print ("-------------------------------")
 print ("COBRA GROCERY")
 print ("-------------------------------")
+print ("Address:")
+print ("3700 O St. NW")
+print ("Washington, DC 20057")
+print (" ")
 print ("Website: www.cg.com")
 print ("Phone: 202.687.5874")
+
 
 #CURRENT DATE AND TIME
 #https://www.pythonprogramming.in/get-current-time-in-mst-est-utc-and-gmt.html
@@ -112,15 +113,20 @@ print ("Checkout Time: ", datetime.now(est))
 print ("-------------------------------")
 print ("Shopping Cart Items: ")
 
+
 #RETURN SELECTED PRODUCTS
 for products in matching_products:
     name = str(products["name"])
     price = products["price"]
-    print ("+", name, " (", to_usd(price), ")")
+    print ("...", name, " (", to_usd(price), ")")
+
 
 #SUBTOTAL
+for price in matching_products:
+    subtotal = subtotal + round(price["price"], 3)
 print ("-------------------------------")
 print ("Subtotal: ", to_usd(subtotal))
+
 
 #SALES TAX RATE: 6% in DC on all sales items
 #ROUNDING: 2 decimal places
@@ -130,9 +136,11 @@ tax = subtotal * TAX_RATE   #(input env var here)
 tax_cost = round(tax, 3)
 print ("DC Sales Tax (6%): ", to_usd(tax_cost))
 
+
 #TOTAL PRICE
 total = subtotal + tax_cost
 print ("Total: ", to_usd(total))
 
 print ("-------------------------------")
 print ("Thanks for your business! Please come again.")
+print ("-------------------------------")
