@@ -106,19 +106,23 @@ print ("Phone: 202.687.5874")
 
 #CURRENT DATE AND TIME
 #https://www.pythonprogramming.in/get-current-time-in-mst-est-utc-and-gmt.html
+#https://www.programiz.com/python-programming/datetime/current-datetime
+#https://stackoverflow.com/questions/1759455/how-can-i-account-for-period-am-pm-using-strftime
 from datetime import datetime
 from pytz import timezone
 est = timezone('EST')
-print ("Checkout Time: ", datetime.now(est))
+now = datetime.now(est)
+date_time = now.strftime("%Y-%m-%d %I:%M %p")
+print ("Checkout Time:", date_time)
 print ("-------------------------------")
-print ("Shopping Cart Items: ")
+print ("Shopping Cart Items:")
 
 
 #RETURN SELECTED PRODUCTS
 for products in matching_products:
     name = str(products["name"])
     price = products["price"]
-    print ("...", name, " (", to_usd(price), ")")
+    print ("+", name, "({})".format(to_usd(price)))
 
 
 #SUBTOTAL
