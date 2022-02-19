@@ -15,10 +15,10 @@ html_content = "Hello World"
 #print("HTML:", html_content)
 
 # FYI: we'll need to use our verified SENDER_ADDRESS as the `from_email` param
-# ... but we can customize the `to_emails` param to send to other addresses
+### ... but we can customize the `to_emails` param to send to other addresses
 #message = Mail(from_email=SENDER_ADDRESS, to_emails=SENDER_ADDRESS, subject=subject, html_content=html_content)
-message = Mail(from_email="rebecca.mfdz@gmail.com", 
-               to_emails="rmf83@georgetown.edu", 
+message = Mail(from_email="SENDER_ADDRESS", 
+               to_emails="RECEIVE_ADDRESS", 
                subject=subject, 
                html_content=html_content)
 
