@@ -23,7 +23,7 @@ message = Mail(from_email="rebecca.mfdz@gmail.com",
                html_content=html_content)
 
 try:
-    client = SendGridAPIClient(os.environ['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'])
+    client = SendGridAPIClient(os.environ['SENDGRID_API_KEY'])
     response = client.send(message)
 
     print("RESPONSE:", type(response)) #> <class 'python_http_client.client.Response'>

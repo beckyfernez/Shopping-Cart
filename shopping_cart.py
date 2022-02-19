@@ -40,11 +40,16 @@ def to_usd(my_price):
 subtotal = 0
 selected_ids = []
 matching_products = []
-dc_tax = 0.06
 
-
+#BONUS 1
+#https://www.youtube.com/watch?v=YdgIWTYQ69A
+from dotenv import load_dotenv
 import os
-TAX_RATE = os.getenv("TAX_RATE", default=dc_tax)
+load_dotenv()
+
+#SALES TAX RATE: 6% in DC on all sales items (default)
+#https://howtostartanllc.com/taxes/district-of-columbia-sales-tax#:~:text=Fortunately%2C%20D.C.%20has%20only%20a,Zip%20Code%20in%20the%20US.
+TAX_RATE = os.getenv("TAX_RATE", default=0.06)
 
 
 while True:
@@ -132,13 +137,13 @@ print ("-------------------------------")
 print ("Subtotal: ", to_usd(subtotal))
 
 
-#SALES TAX RATE: 6% in DC on all sales items
 #ROUNDING: 2 decimal places
-#https://howtostartanllc.com/taxes/district-of-columbia-sales-tax#:~:text=Fortunately%2C%20D.C.%20has%20only%20a,Zip%20Code%20in%20the%20US.
 #https://www.kite.com/python/answers/how-to-limit-a-float-to-two-decimal-places-in-python
-tax = subtotal * TAX_RATE   #(input env var here)
+tax = subtotal * float(TAX_RATE)   #(input env var here)
 tax_cost = round(tax, 3)
-print ("DC Sales Tax (6%): ", to_usd(tax_cost))
+#Formatting percentage
+#https://www.kite.com/python/answers/how-to-format-a-number-as-a-percentage-in-python
+print ("Sales Tax ", "({})".format("{:.2%}".format(float(TAX_RATE))), ": ", to_usd(tax_cost))
 
 
 #TOTAL PRICE
