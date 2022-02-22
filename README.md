@@ -54,7 +54,7 @@ Edit and save a file, using a command-line utility provided by your preferred te
 code .env
 ```
 
-Create environmental variable within .env file (Example Code):
+Create environmental variables within .env file (Example Code):
 
 ```sh
 # this is the ".env" file... with environment variables
@@ -77,7 +77,7 @@ NOTE: The ".env" file must be ignored from version control, by using a correspon
 
 Link your Sendgrid API Key:
 
-On your Sendgrid page, create a new API Key and integrate using a Web API. Here, you will be prompted to run the following in your terminal/shell:
+On your SendGrid page, create a new API Key and integrate using a Web API. You will then be prompted to run the following in your terminal/shell:
 
 ```sh
 echo "export SENDGRID_API_KEY='YOUR_SENDGRID_API_KEY'" > sendgrid.env
@@ -96,13 +96,13 @@ You are now ready to run the two bonus objectives.
 
 Configure your own tax rate according to your sales region and run the shopping cart program:
 
-Install python-dotenv to read key-value pairs from a .env file
+Install python-dotenv to read key-value pairs from a .env file:
 
 ```sh
 pip install python-dotenv
 ```
 
-Enter tax rate percent as a decimal
+Enter tax rate percent as a decimal:
 ```sh
 TAX_RATE=0.0875 python shopping_cart.py
 ```
