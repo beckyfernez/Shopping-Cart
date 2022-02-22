@@ -50,6 +50,7 @@ from sendgrid.helpers.mail import Mail
 
 load_dotenv()
 
+#ENVIRONMENT VARIABLES
 #SALES TAX RATE: 6% in DC on all sales items (default)
 #https://howtostartanllc.com/taxes/district-of-columbia-sales-tax#:~:text=Fortunately%2C%20D.C.%20has%20only%20a,Zip%20Code%20in%20the%20US.
 TAX_RATE = os.getenv("TAX_RATE", default=0.06)
@@ -137,6 +138,7 @@ matching_price = []
 for price in matching_products:
     matching_price.append(price["price"])
 
+
 #SUBTOTAL
 for price in matching_products:
     subtotal = subtotal + round(price["price"], 3)
@@ -160,6 +162,7 @@ print ("-------------------------------")
 
 
 #EMAIL RECEIPT
+#https://github.com/prof-rossetti/intro-to-python/blob/main/notes/python/packages/sendgrid.md#email-templates
 email_choice = input ("Would you wish to receive your receipt by email? 'YES' or 'NO': ")
 email_choice = email_choice.upper()
 if str(email_choice) == "NO":
@@ -188,6 +191,6 @@ elif str(email_choice) == "YES":
     except Exception as e:
         print(type(e))
         print(e)
-    ("-------------------------------")
+    print ("-------------------------------")
     print ("Thanks for your business! Please come again.")
     print ("-------------------------------")

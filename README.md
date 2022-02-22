@@ -10,6 +10,7 @@ Some descriptions have been adapted from the Tic-Tac-Toe repository, "Command-li
   + Anaconda 3.7+
   + Python 3.7+
   + Pip
+  + SendGrid
 
 ## Setup
 
