@@ -3,7 +3,7 @@
 
 A Completed Repository for the ["Shopping Cart" Project](https://github.com/prof-rossetti/intro-to-python/blob/main/projects/shopping-cart/README.md).
 
-Some descriptions have been adapted from the tic-tac-toe repository belonging to Professor Rossetti.
+Some descriptions have been adapted from the Tic-Tac-Toe repository, "Command-line Computing" Exercise, and Shopping Cart Project belonging to Professor Rossetti.
 
 ## Prerequisites
 
@@ -37,6 +37,35 @@ Install package dependencies (mainly for testing):
 pip install -r requirements.txt
 ```
 
+Create .env file:
+
+```sh
+touch .env
+```
+
+Edit and save a file, using a command-line utility provided by your preferred text editor (like VS Code):
+
+```sh
+code .env
+```
+
+Create environmental variable within .env file (Example Code):
+
+```sh
+# this is the ".env" file... with environment variables
+
+TAX_RATE=0.06
+```
+
+NOTE: The ".env" file must be ignored from version control, by using a corresponding entry in the ".gitignore" file.
+
+```sh
+# this is the ".gitignore" file...
+
+# ignore environment variables in the ".env" file:
+.env
+```
+
 ## Usage
 
 Configure your own tax rate according to your sales region and run the shopping cart program:
@@ -47,14 +76,14 @@ Install python-dotenv to read key-value pairs from a .env file
 pip install python-dotenv
 ```
 
-Please enter tax rate percent as a decimal
+Enter tax rate percent as a decimal
 ```sh
 TAX_RATE=0.0875 python shopping_cart.py
 ```
 
 OR
 
-Continue with default tax rate, 0.06 (D.C. sales tax rate), and shopping cart program:
+Continue with default tax rate, 0.06 (D.C. sales tax rate), and run the shopping cart program:
 
 ```sh
 python shopping_cart.py
