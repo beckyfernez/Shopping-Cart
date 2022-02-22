@@ -133,6 +133,9 @@ for products in matching_products:
     price = products["price"]
     print ("+", name, "({})".format(to_usd(price)))
 
+matching_price = []
+for price in matching_products:
+    matching_price.append(price["price"])
 
 #SUBTOTAL
 for price in matching_products:
@@ -157,33 +160,25 @@ print ("-------------------------------")
 
 
 #EMAIL RECEIPT
-email_choice = input ("Would you wish to have your receipt emailed to you? 'YES' or 'NO': ")
+email_choice = input ("Would you wish to receive your receipt by email? 'YES' or 'NO': ")
 email_choice = email_choice.upper()
-
 if str(email_choice) == "NO":
     print ("-------------------------------")
     print ("Thanks for your business! Please come again.")
     print ("-------------------------------")
 
 elif str(email_choice) == "YES":
+    customer_email = input ("Enter customer email: ")
     template_data = {
-        "total_price_usd": "$14.95",
-        "human_friendly_timestamp": "June 1st, 2019 10:00 AM",
-        "products":[
-            {"id":1, "name": "Product 1"},
-            {"id":2, "name": "Product 2"},
-            {"id":3, "name": "Product 3"},
-            {"id":2, "name": "Product 2"},
-            {"id":1, "name": "Product 1"}
-        ]
+        "total_price_usd": to_usd(total),
+        "human_friendly_timestamp": date_time,
+        "products": matching_products
     } # or construct this dictionary dynamically based on the results of some other process :-D
-
     message = Mail(
         from_email=SENDER_ADDRESS, 
-        to_emails=SENDER_ADDRESS,)
+        to_emails=customer_email,)
     message.template_id = SENDGRID_TEMPLATE_ID
     message.dynamic_template_data = template_data
-
     try:
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
@@ -193,7 +188,6 @@ elif str(email_choice) == "YES":
     except Exception as e:
         print(type(e))
         print(e)
-    
     print ("-------------------------------")
     print ("Thanks for your business! Please come again.")
     print ("-------------------------------")

@@ -14,14 +14,14 @@ SENDER_ADDRESS = os.getenv('SENDER_ADDRESS', default='SENDER_ADDRESS')
 SENDGRID_TEMPLATE_ID = os.getenv('SENDGRID_TEMPLATE_ID', default='SENDGRID_TEMPLATE_ID')
 
 template_data = {
-    "total_price_usd": "$14.95",
+    "total_price_usd": "$27.98",
     "human_friendly_timestamp": "June 1st, 2019 10:00 AM",
     "products":[
-        {"id":1, "name": "Product 1"},
-        {"id":2, "name": "Product 2"},
-        {"id":3, "name": "Product 3"},
-        {"id":2, "name": "Product 2"},
-        {"id":1, "name": "Product 1"}
+        {"id": 100, "name": "Product 100", "price": "$9.99"},
+        {"id": 200, "name": "Product 200", "price": "$3.50"},
+        {"id": 300, "name": "Product 300", "price": "$1.00"},
+        {"id": 200, "name": "Product 200", "price": "$3.50"},
+        {"id": 100, "name": "Product 100", "price": "$9.99"}
     ]
 } # or construct this dictionary dynamically based on the results of some other process :-D
 
