@@ -37,6 +37,10 @@ Install package dependencies (mainly for testing):
 pip install -r requirements.txt
 ```
 
+## Environment Variables
+
+In order to run the two implemented bonus objectives (varying tax rates and email receipts), you need to create your own environment variables in a .env file.
+
 Create .env file:
 
 ```sh
@@ -55,6 +59,10 @@ Create environmental variable within .env file (Example Code):
 # this is the ".env" file... with environment variables
 
 TAX_RATE=0.06
+
+SENDER_ADDRESS='from_email@example.com'
+
+SENDGRID_TEMPLATE_ID='YOUR_SENDGRID_TEMPLATE_ID'
 ```
 
 NOTE: The ".env" file must be ignored from version control, by using a corresponding entry in the ".gitignore" file.
@@ -65,6 +73,23 @@ NOTE: The ".env" file must be ignored from version control, by using a correspon
 # ignore environment variables in the ".env" file:
 .env
 ```
+
+Link your Sendgrid API Key:
+
+On your Sendgrid page, create a new API Key and integrate using a Web API. Here, you will be prompted to run the following in your terminal/shell:
+
+```sh
+echo "export SENDGRID_API_KEY='YOUR_SENDGRID_API_KEY'" > sendgrid.env
+echo "sendgrid.env" >> .gitignore
+source ./sendgrid.env
+```
+
+Install the package:
+```sh
+pip install sendgrid
+```
+
+You are now ready to run the two bonus objectives.
 
 ## Usage
 
@@ -89,6 +114,10 @@ Continue with default tax rate, 0.06 (D.C. sales tax rate), and run the shopping
 python shopping_cart.py
 ```
 
+You will be asked if you would wish to receive your receipt by email. If 'YES' is selected, you will be prompted to enter a customer email. If 'NO' is selected, the program will complete and exit. 
+
+NOTE: If you have not configured the environment variables for the receipt email, enter 'NO' when asked if you would wish to receive your receipt by email.
+
 ## Demo
 
 Here is a demonstration of the application:
@@ -97,7 +126,7 @@ Here is a demonstration of the application:
 Please input a product identifier, or 'DONE' if there are no more items: 2
 Please input a product identifier, or 'DONE' if there are no more items: 3
 Please input a product identifier, or 'DONE' if there are no more items: 4
-Please input a product identifier, or 'DONE' if there are no more items: done
+Please input a product identifier, or 'DONE' if there are no more items: DONE
 -------------------------------
 COBRA GROCERY
 -------------------------------
@@ -118,7 +147,22 @@ Subtotal:  $14.47
 Sales Tax (6.00%):  $0.87
 Total:  $15.34
 -------------------------------
-Thanks for your business! Please come again.
+Would you wish to receive your receipt by email? 'YES' or 'NO': YES
+Enter customer email: to_email@example.com
+202
+b''
+Server: nginx
+Date: Tue, 22 Feb 2022 10:18:57 GMT
+Content-Length: 0
+Connection: close
+X-Message-Id: fFikgMfYQ--Ys55w_gOQ0A
+Access-Control-Allow-Origin: https://sendgrid.api-docs.io
+Access-Control-Allow-Methods: POST
+Access-Control-Allow-Headers: Authorization, Content-Type, On-behalf-of, x-sg-elas-acl
+Access-Control-Max-Age: 600
+X-No-CORS-Reason: https://sendgrid.com/docs/Classroom/Basics/API/cors.html
+Strict-Transport-Security: max-age=600; includeSubDomains
 -------------------------------
-
+Your receipt has been sent. Thanks for your business, and please come again!
+-------------------------------
 ```

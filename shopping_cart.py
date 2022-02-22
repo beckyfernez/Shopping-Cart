@@ -188,6 +188,6 @@ elif str(email_choice) == "YES":
     except Exception as e:
         print(type(e))
         print(e)
-    print ("-------------------------------")
+    ("-------------------------------")
     print ("Thanks for your business! Please come again.")
     print ("-------------------------------")
