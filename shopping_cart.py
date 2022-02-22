@@ -41,16 +41,20 @@ subtotal = 0
 selected_ids = []
 matching_products = []
 
-#BONUS 1
+#BONUS 1 (Creating an environment variable)
 #https://www.youtube.com/watch?v=YdgIWTYQ69A
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
 load_dotenv()
 
 #SALES TAX RATE: 6% in DC on all sales items (default)
 #https://howtostartanllc.com/taxes/district-of-columbia-sales-tax#:~:text=Fortunately%2C%20D.C.%20has%20only%20a,Zip%20Code%20in%20the%20US.
 TAX_RATE = os.getenv("TAX_RATE", default=0.06)
-
+SENDER_ADDRESS = os.getenv('SENDER_ADDRESS', default='SENDER_ADDRESS')
+SENDGRID_TEMPLATE_ID = os.getenv('SENDGRID_TEMPLATE_ID', default='SENDGRID_TEMPLATE_ID')
 
 while True:
 
@@ -149,11 +153,47 @@ print ("Sales Tax ", "({})".format("{:.2%}".format(float(TAX_RATE))), ": ", to_u
 #TOTAL PRICE
 total = subtotal + tax_cost
 print ("Total: ", to_usd(total))
-
-print ("-------------------------------")
-print ("Thanks for your business! Please come again.")
 print ("-------------------------------")
 
 
+#EMAIL RECEIPT
+email_choice = input ("Would you wish to have your receipt emailed to you? 'YES' or 'NO': ")
+email_choice = email_choice.upper()
 
+if str(email_choice) == "NO":
+    print ("-------------------------------")
+    print ("Thanks for your business! Please come again.")
+    print ("-------------------------------")
 
+elif str(email_choice) == "YES":
+    template_data = {
+        "total_price_usd": "$14.95",
+        "human_friendly_timestamp": "June 1st, 2019 10:00 AM",
+        "products":[
+            {"id":1, "name": "Product 1"},
+            {"id":2, "name": "Product 2"},
+            {"id":3, "name": "Product 3"},
+            {"id":2, "name": "Product 2"},
+            {"id":1, "name": "Product 1"}
+        ]
+    } # or construct this dictionary dynamically based on the results of some other process :-D
+
+    message = Mail(
+        from_email=SENDER_ADDRESS, 
+        to_emails=SENDER_ADDRESS,)
+    message.template_id = SENDGRID_TEMPLATE_ID
+    message.dynamic_template_data = template_data
+
+    try:
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(type(e))
+        print(e)
+    
+    print ("-------------------------------")
+    print ("Thanks for your business! Please come again.")
+    print ("-------------------------------")
